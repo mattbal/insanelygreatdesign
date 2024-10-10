@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Website {
-  name String
-  url String @id
-  imgUrl String
+  name      String
+  url       String   @id
+  imgUrl    String
   dateAdded DateTime @default(now())
 }
