@@ -1,4 +1,3 @@
-import Card from '@/components/Card';
 import Websites from '@/components/Websites';
 import { getWebsites } from '@/lib/fetchFunctions';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
