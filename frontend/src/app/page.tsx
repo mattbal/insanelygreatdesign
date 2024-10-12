@@ -1,12 +1,23 @@
 import Card from '@/components/Card';
+import Websites from '@/components/Websites';
+import { getWebsites } from '@/lib/fetchFunctions';
+import prisma from '@/lib/prisma';
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 export default async function Home() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['websites'],
+    queryFn: getWebsites,
+    initialPageParam: 0,
+  });
+
   return (
-    <main className='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-8 max-w-screen-2xl mx-auto'>
-      <Card imgUrl='screenshot.png' name='Hacker Noon' url='neon.tech' />
-      <Card imgUrl='neon.png' name='Neon' url='neon.tech' />
-      <Card imgUrl='neon.png' name='Neon' url='neon.tech' />
-      <Card imgUrl='neon.png' name='Neon' url='neon.tech' />
+    <main className='px-8 max-w-screen-2xl mx-auto'>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Websites />
+      </HydrationBoundary>
     </main>
   );
 }
