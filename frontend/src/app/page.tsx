@@ -1,7 +1,6 @@
 import Card from '@/components/Card';
 import Websites from '@/components/Websites';
 import { getWebsites } from '@/lib/fetchFunctions';
-import prisma from '@/lib/prisma';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
 export default async function Home() {
