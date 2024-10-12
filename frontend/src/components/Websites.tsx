@@ -19,11 +19,10 @@ export default function Websites() {
     queryKey: ['websites'],
     queryFn: getWebsites,
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) {
-        return undefined;
-      }
-      return lastPage[lastPage.length - 1].id;
+    getNextPageParam: (lastPage) => {
+      const nextPageParam = lastPage[lastPage.length - 1].id;
+      if (nextPageParam === 1) return undefined; // 1 is the last entry since the websites are sorted in desc. order
+      return nextPageParam;
     },
   });
 
@@ -116,7 +115,7 @@ export default function Websites() {
         })}
       </div>
       {isFetchingNextPage && (
-        <p className='text-center mb-10'>Loading more websites...</p>
+        <p className='text-center mb-10 text-neutral-600'>Loading more websites...</p>
       )}
     </>
   );
