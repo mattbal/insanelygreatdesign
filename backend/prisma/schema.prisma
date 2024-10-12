@@ -9,7 +9,7 @@ datasource db {
 
 model Website {
   name String
-  url String @id
+  url String   @unique
+  id Int @id @default(autoincrement())
   imgUrl String
-  dateAdded DateTime @default(now())
 }

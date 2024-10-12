@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Website {
-  name      String
-  url       String   @id
-  imgUrl    String
-  dateAdded DateTime @default(now())
+  name   String
+  url    String @unique
+  imgUrl String
+  id     Int    @id @default(autoincrement())
 }
