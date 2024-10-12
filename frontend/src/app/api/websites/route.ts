@@ -28,8 +28,14 @@ export async function GET(request: NextRequest) {
       return Response.json(websites);
     }
   } catch (error) {
-    return new Response(`${error}`, {
-      status: 500,
-    });
+    if (error instanceof Error) {
+      return new Response(`${error.message}`, {
+        status: 500,
+      });
+    } else {
+      return new Response('Something went wrong.', {
+        status: 500,
+      });
+    }
   }
 }

@@ -11,10 +11,7 @@ const websiteSchema = z.array(
 
 export async function getWebsites({ pageParam }: { pageParam: number }) {
   const res = await fetch('/api/websites?cursor=' + pageParam);
-  if (res.status >= 500) {
-    throw new Error(`Something went wrong. ${res.status} - ${res.statusText}`);
-  }
-  if (!res.ok) {
+  if (res.status >= 500 || !res.ok) {
     throw new Error(`${res.status} - ${res.statusText}`);
   }
   const json = await res.json();
